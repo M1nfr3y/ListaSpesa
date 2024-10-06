@@ -10,7 +10,7 @@ import com.lista.spesa.ListaSpesa.repository.SpeseRepository;
 public class SpesaServiceImpl implements SpeseService {
 
     @Autowired
-    SpeseRepository speseRepository;
+    private SpeseRepository speseRepository;
 
     @Override
     public List<Spese> getAllSpese() {
