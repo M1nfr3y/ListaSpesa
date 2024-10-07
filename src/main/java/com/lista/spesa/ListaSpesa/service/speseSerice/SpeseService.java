@@ -6,7 +6,7 @@ import com.lista.spesa.ListaSpesa.model.Spese;
 
 public interface SpeseService {
 
-    public List<Spese> getAllSpese();
+    public List<Spese> getAllSpeseByUser(User user);
     
     public Spese getSpeseById(Long id);
 

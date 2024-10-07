@@ -3,11 +3,14 @@ package com.lista.spesa.ListaSpesa.service.speseSerice;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.lista.spesa.ListaSpesa.model.Spese;
 import com.lista.spesa.ListaSpesa.repository.SpeseRepository;
 
-public class SpesaServiceImpl implements SpeseService {
+public class SpesaServiceImpl implements SpeseService,UserDetailsService {
 
     @Autowired
     private SpeseRepository speseRepository;
@@ -40,6 +43,12 @@ public class SpesaServiceImpl implements SpeseService {
     public Spese updateSpesa(Spese spesa) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'updateSpesa'");
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'loadUserByUsername'");
     }
     
 }

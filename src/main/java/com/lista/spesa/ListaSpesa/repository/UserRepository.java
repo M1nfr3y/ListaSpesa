@@ -6,4 +6,5 @@ import com.lista.spesa.ListaSpesa.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     
+    User findByUser(String username);
 }
