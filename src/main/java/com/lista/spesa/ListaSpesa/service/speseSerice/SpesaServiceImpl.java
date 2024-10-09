@@ -6,43 +6,41 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import com.lista.spesa.ListaSpesa.model.Spese;
+import com.lista.spesa.ListaSpesa.model.User;
 import com.lista.spesa.ListaSpesa.repository.SpeseRepository;
 
-public class SpesaServiceImpl implements SpeseService,UserDetailsService {
+@Service
+public class SpesaServiceImpl implements SpeseService, UserDetailsService {
 
     @Autowired
     private SpeseRepository speseRepository;
 
     @Override
-    public List<Spese> getAllSpese() {
-       speseRepository.findAll();
-        throw new UnsupportedOperationException("Unimplemented method 'getAllSpese'");
-    }
-
-    @Override
-    public Spese getSpeseById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getSpeseById'");
-    }
-
-    @Override
     public Spese createSpesa(Spese spese) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createSpesa'");
+        return speseRepository.save(spese);
     }
 
     @Override
     public void deleteSpesaById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteSpesaById'");
+      speseRepository.deleteById(id);
+    }
+    
+    @Override
+    public Spese updateSpesa(Long id, Spese spesa) {
+        return speseRepository.findById(id).map(expense ->{
+            expense.setAmount(spesa.getAmount());
+            expense.setDescription(spesa.getDescription());
+            expense.setDate(spesa.getDate());
+            return speseRepository.save(expense);
+        }).orElse(null);
     }
 
     @Override
-    public Spese updateSpesa(Spese spesa) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateSpesa'");
+    public List<Spese> getAllSpeseByUser(User user) {
+       return speseRepository.speseFindByUser(user);
     }
 
     @Override
