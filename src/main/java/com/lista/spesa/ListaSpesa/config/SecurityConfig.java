@@ -10,7 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import com.lista.spesa.ListaSpesa.service.speseSerice.SpesaServiceImpl;
+import com.lista.spesa.ListaSpesa.service.user.CustomUserDetailsService;
+
 
 @Configuration // È un modo per dire a Spring che questa classe contiene dei bean
 @EnableWebSecurity // Abilita il supporto della sicurezza web di Spring Security e consente di
@@ -20,7 +21,7 @@ public class SecurityConfig {
     @Bean // Definisce un bean che ritorna un'istanza di CustomUserDetailsService. Questo
           // servizio personalizzato carica i dettagli di autenticazione dell'utente
     public UserDetailsService userDetailsService() {
-        return new SpesaServiceImpl();
+        return new CustomUserDetailsService();
     }
 
     @Bean // Definisce un bean che fornisce un'istanza di BCryptPasswordEncoder, che serve

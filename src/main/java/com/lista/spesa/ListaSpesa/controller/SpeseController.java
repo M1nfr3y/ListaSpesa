@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lista.spesa.ListaSpesa.model.Spese;
 import com.lista.spesa.ListaSpesa.model.User;
-import com.lista.spesa.ListaSpesa.service.speseSerice.SpesaServiceImpl;
+import com.lista.spesa.ListaSpesa.service.speseSerice.SpesaService;
 import com.lista.spesa.ListaSpesa.service.speseSerice.UserService;
 
 //Il controller gestirà le richieste HTTP e interagirà con il servizio per operare sulle spese dell'utente autenticato.
@@ -19,7 +19,7 @@ import com.lista.spesa.ListaSpesa.service.speseSerice.UserService;
 public class SpeseController {
 
     @Autowired
-    private SpesaServiceImpl spesaServiceImpl;
+    private SpesaService spesaService;
 
     @Autowired
     private UserService userService;
@@ -27,6 +27,6 @@ public class SpeseController {
     @GetMapping
     public List<Spese> getSpese(Authentication authentication){
         User user = userService.findByUsername(authentication.getName());
-        return spesaServiceImpl.getAllSpeseByUser(user);
+        return spesaService.getAllSpeseByUser(user);
     }
 }

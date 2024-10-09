@@ -13,22 +13,22 @@ import com.lista.spesa.ListaSpesa.model.User;
 import com.lista.spesa.ListaSpesa.repository.SpeseRepository;
 
 @Service
-public class SpesaServiceImpl implements SpeseService, UserDetailsService {
+public class SpesaService {
 
     @Autowired
     private SpeseRepository speseRepository;
 
-    @Override
+    
     public Spese createSpesa(Spese spese) {
         return speseRepository.save(spese);
     }
 
-    @Override
+  
     public void deleteSpesaById(Long id) {
       speseRepository.deleteById(id);
     }
     
-    @Override
+ 
     public Spese updateSpesa(Long id, Spese spesa) {
         return speseRepository.findById(id).map(expense ->{
             expense.setAmount(spesa.getAmount());
@@ -38,15 +38,9 @@ public class SpesaServiceImpl implements SpeseService, UserDetailsService {
         }).orElse(null);
     }
 
-    @Override
+
     public List<Spese> getAllSpeseByUser(User user) {
        return speseRepository.speseFindByUser(user);
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'loadUserByUsername'");
     }
     
 }
